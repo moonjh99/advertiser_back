@@ -29,7 +29,12 @@ public class User {
     @Column(nullable=false, length=60)
     private String name;
 
-    @Column(nullable=false)
-    private Instant createdAt = Instant.now();
+    @Column(nullable = false, updatable = false)
+    private Instant createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = Instant.now();
+    }
 
 }

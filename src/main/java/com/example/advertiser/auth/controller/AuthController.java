@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final UserService userService;
-    private JwtProvider jwtProvider;
+    private final JwtProvider jwtProvider;
 
     @PostMapping("/signup")
     public ApiResponse<LoginResponse> signup(@Valid @RequestBody SignupRequest req) {
