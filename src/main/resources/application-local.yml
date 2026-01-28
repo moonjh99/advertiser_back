@@ -22,9 +22,3 @@ app:
   jwt:
     secret: "CHANGE_ME_TO_A_LONG_RANDOM_SECRET_CHANGE_ME"
     access-token-minutes: 120
-
-cors:
-  allowed-origins:
-    - "http://localhost:3000"
-    - "http://127.0.0.1:3000"
-    - "http://5.0.50.42:3000"
