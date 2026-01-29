@@ -35,12 +35,12 @@ public class OrderService {
 
     @Transactional(readOnly = true)
     public List<Order> listMyOrders(Long userId) {
-        return repo.findByUserIdOrderByCreatedAtDesc(userId);
+        return repo.findWithItemsByUserId(userId);
     }
 
     @Transactional(readOnly = true)
     public Order get(Long orderId) {
-        return repo.findById(orderId)
+        return repo.findByIdWithItems(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("order not found"));
     }
 }

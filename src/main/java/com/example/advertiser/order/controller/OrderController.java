@@ -21,10 +21,12 @@ public class OrderController {
     private final OrderService orderService;
 
     private Long requireUserId(Authentication auth) {
-        if(auth == null || auth.getDetails() == null) throw new IllegalArgumentException("unauthorized");
-        JwtProvider.JwtClaims claims = (JwtProvider.JwtClaims) auth.getPrincipal();
-        return claims.userId();
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new IllegalArgumentException("unauthorized");
+        }
+        return (Long) auth.getPrincipal();
     }
+
 
     @PostMapping
     public ResponseEntity<ApiResponse<OrderResponse>> create(Authentication auth, @RequestBody CreateOrderRequest req){
@@ -42,9 +44,9 @@ public class OrderController {
 
     @GetMapping("/me")
     public ResponseEntity<ApiResponse<List<OrderResponse>>> myOrders(
-            Authentication authentication
+            Authentication auth
     ) {
-        Long userId = (Long) authentication.getPrincipal();
+        Long userId = requireUserId(auth);
         List<OrderResponse> data = orderService.listMyOrders(userId)
                 .stream()
                 .map(this::toResponse)
