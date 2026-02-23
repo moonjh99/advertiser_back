@@ -10,7 +10,8 @@ public class CorsConfig implements WebMvcConfigurer {
     private final String[] allowedArray = {
             "http://localhost:3000",
             "http://127.0.0.1:3000",
-            "http://5.0.50.42:3000"};
+            "http://5.0.50.42:3000",
+            "http://192.168.125.48:3000"};
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
